@@ -1,12 +1,9 @@
 require('dotenv').config()
 const express = require('express');
+const app = express();
 const helmet = require('helmet');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
-// const key = require('../keys/sheet-grabber-295609-9fc82beacf7f.json');
-const { googleSheetParser } = require('./googleSheetParser');
-
-const app = express();
-const port = process.env.EXPRESS_PORT ? process.env.EXPRESS_PORT : 3000;
+const { googleSheetParser } = require('./config/googleSheetParser');
 
 app.use(helmet());
 
@@ -26,6 +23,8 @@ app.get('/:sheetID.json', (req, res) => {
   });
 });
 
+
+const port = process.env.EXPRESS_PORT ? process.env.EXPRESS_PORT : 3000;
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server Port: ${port}`);
 });
